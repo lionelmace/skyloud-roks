@@ -52,16 +52,3 @@ output "cloud_monitoring_crn" {
   description = "The CRN of the Cloud Monitoring instance"
   value       = module.cloud_monitoring.crn
 }
-
-## IAM
-##############################################################################
-
-resource "ibm_iam_access_group_policy" "iam-sysdig" {
-  access_group_id = ibm_iam_access_group.accgrp.id
-  roles           = ["Writer", "Editor"]
-
-  resources {
-    service           = "sysdig-monitor"
-    resource_group_id = ibm_resource_group.group.id
-  }
-}

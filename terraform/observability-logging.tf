@@ -65,15 +65,3 @@ output "log_analysis_crn" {
   value       = module.log_analysis.crn
 }
 
-## IAM
-##############################################################################
-
-resource "ibm_iam_access_group_policy" "iam-log-analysis" {
-  access_group_id = ibm_iam_access_group.accgrp.id
-  roles           = ["Manager", "Viewer", "Standard Member"]
-
-  resources {
-    service           = "logdna"
-    resource_group_id = ibm_resource_group.group.id
-  }
-}
