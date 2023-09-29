@@ -153,6 +153,22 @@ resource "ibm_container_vpc_cluster" "roks_cluster" {
   }
 }
 
+
+# Retrieve VPC LB attached to the cluster
+##############################################################################
+data "ibm_container_vpc_cluster" "roks_cluster" {
+  name = ibm_container_vpc_cluster.roks_cluster.id
+}
+
+data "ibm_container_vpc_alb" "roks_cluster_alb" {
+  alb_id = data.ibm_container_vpc_cluster.roks_cluster.albs[0].id
+}
+
+output "roks_cluster_alb" {
+  value = data.ibm_container_vpc_alb.roks_cluster_alb
+}
+
+
 # Additional Worker Pool
 ##############################################################################
 # resource "ibm_container_vpc_worker_pool" "roks_worker_pools" {
