@@ -161,7 +161,7 @@ data "ibm_container_vpc_cluster" "roks_cluster" {
 }
 
 data "ibm_container_vpc_alb" "roks_cluster_alb" {
-  alb_id = data.ibm_container_vpc_cluster.roks_cluster.albs[0].id
+  alb_id = data.ibm_container_vpc_cluster.roks_cluster.albs[1].id
 }
 
 output "roks_cluster_alb" {
