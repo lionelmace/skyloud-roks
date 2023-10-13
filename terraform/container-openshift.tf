@@ -168,17 +168,21 @@ resource "ibm_container_vpc_cluster" "roks_cluster" {
 data "ibm_is_lbs" "vpc-lbs" {
 }
 
-resource "null_resource" "users" {
-  for_each = toset(data.ibm_is_lbs.vpc-lbs.load_balancers)
-
-  triggers = {
-    name = each.value
-  }
+data "ibm_is_alb" "vpc-lb" {
+  lb_id = data.ibm_is_lbs.load_balancers[1].name
 }
 
-output "user_names_output" {
-  value = [for user in null_resource.users : user.triggers.name]
-}
+# resource "null_resource" "users" {
+#   for_each = toset(data.ibm_is_lbs.vpc-lbs.load_balancers)
+
+#   triggers = {
+#     name = each.value
+#   }
+# }
+
+# output "user_names_output" {
+#   value = [for user in null_resource.users : user.triggers.name]
+# }
 
 # data "ibm_is_lb" "roks_cluster_alb" {
 #   name = ibm_is_lb.example.name
