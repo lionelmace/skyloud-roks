@@ -3,12 +3,11 @@
 ##############################################################################
 
 terraform {
-  required_version = ">=1.4"
+  required_version = ">=1.5"
   required_providers {
     ibm = {
       source  = "IBM-Cloud/ibm"
-      # version = "1.57.0"
-      version = "1.58.0-beta0"
+      version = "1.58.1"
     }
     logdna = {
       source  = "logdna/logdna"
