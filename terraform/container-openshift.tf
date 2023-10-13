@@ -154,41 +154,6 @@ resource "ibm_container_vpc_cluster" "roks_cluster" {
 }
 
 
-# Retrieve VPC LB attached to the cluster
-##############################################################################
-
-# data "ibm_container_vpc_alb" "roks_cluster_alb" {
-#   alb_id = ibm_container_vpc_cluster.roks_cluster.albs[1].id
-# }
-
-# output "roks_cluster_alb" {
-#   value = data.ibm_container_vpc_alb.roks_cluster_alb
-# }
-
-data "ibm_is_lbs" "vpc-lbs" {
-}
-
-data "ibm_is_alb" "vpc-lb" {
-  lb_id = data.ibm_is_lbs.load_balancers[1].name
-}
-
-# resource "null_resource" "users" {
-#   for_each = toset(data.ibm_is_lbs.vpc-lbs.load_balancers)
-
-#   triggers = {
-#     name = each.value
-#   }
-# }
-
-# output "user_names_output" {
-#   value = [for user in null_resource.users : user.triggers.name]
-# }
-
-# data "ibm_is_lb" "roks_cluster_alb" {
-#   name = ibm_is_lb.example.name
-# }
-
-
 # Additional Worker Pool
 ##############################################################################
 # resource "ibm_container_vpc_worker_pool" "roks_worker_pools" {
